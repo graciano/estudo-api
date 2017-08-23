@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let searchElem = document.querySelector('#global-search');
 
+  let pList = document.querySelector('.pokemon-list');
   searchElem.addEventListener('keyup',
     debounce( () => {
       let results = [];
@@ -36,8 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (p.name.search(query) !== -1) results.push(p);
       }
       console.log(results);
-      let pList = document.querySelector('.pokemon-list');
-      pList.innetHTML = '';
+      pList.innerHTML = '';
       for(let i=0; i<results.length; i++) {
         let p = results[i];
         pList.innerHTML += `<li><a href="pokemon.html?name=${p.name}">${p.name}</a></li>`;
