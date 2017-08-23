@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     redirect: 'follow',
   }).then( response => response.json() )
     .then( pokemon => {
-      console.log(pokemon);
+      document.title = pokemon.name;
+      for (let prop in pokemon) {
+        let elem = document.querySelector(`#${prop}`);
+        if (elem) elem.textContent = pokemon[prop];
+      }
     });
 });
