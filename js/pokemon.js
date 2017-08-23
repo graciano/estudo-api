@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }).then( response => response.json() )
     .then( pokemon => {
       document.title = pokemon.name;
+      document.querySelector('#img').src = pokemon.sprites.front_default;
       for (let prop in pokemon) {
         let elem = document.querySelector(`#${prop}`);
         if (elem) elem.textContent = pokemon[prop];
