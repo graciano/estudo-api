@@ -13,7 +13,7 @@ function debounce(func, wait, immediate) {
   };
 };
 
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
   let pokemons = [];
   const API_URL = 'https://pokeapi.co/api/v2';
   fetch(API_URL + '/generation/1', {
@@ -25,19 +25,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
       pokemons = generation['pokemon_species'];
     });
 
-  console.log(document.querySelector('#global-search'));
+  let searchElem = document.querySelector('#global-search');
 
-  document.querySelector('#global-search').addEventListener('keyup', function(ev) {
-//    debounce( () => {
+  searchElem.addEventListener('keyup',
+    debounce( () => {
       let results = [];
-      console.log(this);
-      let query = this.value;
+      let query = searchElem.value;
       for (let i=0; i<pokemons.length; i++) {
         let p = pokemons[i];
         if (p.name.search(query) !== -1) results.push(p);
       }
       console.log(results);
-//    }, 500);
-  });
+      let pList = document.querySelector('.pokemon-list');
+      pList.innetHTML = '';
+      for(let i=0; i<results.length; i++) {
+        let p = results[i];
+        pList.innerHTML += `<li><a href="pokemon.html?name=${p.name}">${p.name}</a></li>`;
+      }
+    }, 500));
 });
-  
